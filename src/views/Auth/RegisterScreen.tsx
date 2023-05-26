@@ -2,6 +2,7 @@ import { LoadingButton } from '@mui/lab';
 import { Container, Grid, Paper, TextField, Typography } from '@mui/material';
 import { useMutation } from '@tanstack/react-query';
 import { TextFieldPassword } from 'components/common';
+import { default as md5 } from 'md5';
 import { enqueueSnackbar } from 'notistack';
 import { Controller, useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
@@ -28,7 +29,10 @@ const RegisterScreen = () => {
 
   const handleClickSubmit = () => {
     handleSubmit((values) => {
-      register(values);
+      register({
+        ...values,
+        password: md5(values.password),
+      });
     })();
   };
 
