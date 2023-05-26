@@ -5,7 +5,7 @@ type PaginateParams = {
 
 type PaginateResponse<T> = {
   items: T[];
+  total: number;
   page: number;
   size: number;
-  total: number;
 };

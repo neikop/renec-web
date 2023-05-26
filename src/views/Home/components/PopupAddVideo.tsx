@@ -44,7 +44,7 @@ const PopupAddVideo = ({ onClose }: PopupController) => {
       <DialogContent>
         <Grid container spacing={3}>
           <Grid item sm={12}>
-            <CardVideo videoInfo={videoInfo} />
+            <CardVideo video={videoInfo} />
           </Grid>
           <Grid item sm={12}>
             <Controller
@@ -59,6 +59,7 @@ const PopupAddVideo = ({ onClose }: PopupController) => {
                   {...field}
                   fullWidth
                   required
+                  autoFocus
                   label='URL'
                   placeholder='https://www.youtube.com/watch?v=VIDEO_ID'
                   error={invalid || isError}

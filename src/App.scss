@@ -23,6 +23,10 @@ main {
   --color-secondary-dark: #3e703e;
 }
 
+a:hover {
+  color: var(--color-primary-dark)
+}
+
 body[data-theme='dark'] {
 }
 

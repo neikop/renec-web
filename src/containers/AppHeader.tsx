@@ -1,5 +1,5 @@
 import { Logout } from '@mui/icons-material';
-import { Avatar, Chip, IconButton, Toolbar } from '@mui/material';
+import { AppBar, Avatar, Chip, IconButton, Toolbar, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { profileSelector, signOut } from 'reducers/profileSlice';
 
@@ -12,12 +12,22 @@ const AppHeader = () => {
   };
 
   return (
-    <Toolbar className='fixed right-0 z-10 gap-3'>
-      <Chip className='font-bold' label={username} avatar={<Avatar>M</Avatar>} />
-      <IconButton onClick={handleClickLogout}>
-        <Logout />
-      </IconButton>
-    </Toolbar>
+    <AppBar position='sticky' elevation={0} className='bg-white'>
+      <Toolbar>
+        <div className='flex items-center gap-3'>
+          <img src={require('assets/icons/Muragi.svg').default} />
+          <Typography variant='h4' color='primary'>
+            MuiTube
+          </Typography>
+        </div>
+        <div className='flex flex-1 items-center justify-end gap-3'>
+          <Chip className='font-bold' label={username} avatar={<Avatar>M</Avatar>} />
+          <IconButton onClick={handleClickLogout}>
+            <Logout />
+          </IconButton>
+        </div>
+      </Toolbar>
+    </AppBar>
   );
 };
 
