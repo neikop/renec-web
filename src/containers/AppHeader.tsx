@@ -1,5 +1,5 @@
 import { Logout } from '@mui/icons-material';
-import { AppBar, Avatar, Chip, IconButton, Toolbar, Typography } from '@mui/material';
+import { AppBar, Avatar, Chip, IconButton, Toolbar, Tooltip, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { profileSelector, signOut } from 'reducers/profileSlice';
 
@@ -22,9 +22,11 @@ const AppHeader = () => {
         </div>
         <div className='flex flex-1 items-center justify-end gap-3'>
           <Chip className='font-bold' label={username} avatar={<Avatar>M</Avatar>} />
-          <IconButton onClick={handleClickLogout}>
-            <Logout />
-          </IconButton>
+          <Tooltip title='Logout'>
+            <IconButton onClick={handleClickLogout}>
+              <Logout />
+            </IconButton>
+          </Tooltip>
         </div>
       </Toolbar>
     </AppBar>

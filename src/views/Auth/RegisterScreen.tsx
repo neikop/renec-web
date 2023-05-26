@@ -1,9 +1,8 @@
 import { LoadingButton } from '@mui/lab';
-import { Container, Grid, Paper, TextField, Typography } from '@mui/material';
+import { Container, Divider, Grid, Paper, TextField, Typography } from '@mui/material';
 import { useMutation } from '@tanstack/react-query';
 import { TextFieldPassword } from 'components/common';
 import { default as md5 } from 'md5';
-import { enqueueSnackbar } from 'notistack';
 import { Controller, useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -17,13 +16,7 @@ const RegisterScreen = () => {
 
   const { mutate: register, isLoading } = useMutation(authService.register, {
     onSuccess: ({ accessToken, ...info }) => {
-      enqueueSnackbar('Login successfully');
-      dispatch(
-        signIn({
-          ...info,
-          accessToken,
-        }),
-      );
+      dispatch(signIn({ ...info, accessToken }));
     },
   });
 
@@ -39,11 +32,22 @@ const RegisterScreen = () => {
   return (
     <Container maxWidth='sm'>
       <Paper className='space-y-6 p-6 md:p-10'>
-        <Typography variant='h3' color='primary' className='-mb-6 text-center'>
-          Sign Up
-        </Typography>
+        <div className='space-y-3'>
+          <div className='mb-6 flex items-center justify-center gap-3'>
+            <img src={require('assets/icons/Muragi.svg').default} />
+            <Typography variant='h4' color='primary'>
+              MuiTube
+            </Typography>
+          </div>
+          <Typography variant='h4' className='text-center'>
+            Register Account
+          </Typography>
+          <Typography color='textSecondary' className='text-center'>
+            Sign up with Username & Password
+          </Typography>
+        </div>
 
-        <Grid container spacing={5}>
+        <Grid container spacing={3}>
           <Grid item xs={12}>
             <Controller
               name='username'
@@ -111,9 +115,10 @@ const RegisterScreen = () => {
 
         <div className='flex justify-center'>
           <LoadingButton fullWidth variant='contained' size='large' loading={isLoading} onClick={handleClickSubmit}>
-            Register
+            Sign Up
           </LoadingButton>
         </div>
+        <Divider />
 
         <div className='flex justify-center gap-2'>
           Already have an account?

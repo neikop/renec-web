@@ -1,9 +1,8 @@
 import { LoadingButton } from '@mui/lab';
-import { Container, Grid, Paper, TextField, Typography } from '@mui/material';
+import { Container, Divider, Grid, Paper, TextField, Typography } from '@mui/material';
 import { useMutation } from '@tanstack/react-query';
 import { TextFieldPassword } from 'components/common';
 import { default as md5 } from 'md5';
-import { enqueueSnackbar } from 'notistack';
 import { Controller, useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -17,13 +16,7 @@ const LoginScreen = () => {
 
   const { mutate: login, isLoading } = useMutation(authService.login, {
     onSuccess: ({ accessToken, ...info }) => {
-      enqueueSnackbar('Login successfully');
-      dispatch(
-        signIn({
-          ...info,
-          accessToken,
-        }),
-      );
+      dispatch(signIn({ ...info, accessToken }));
     },
   });
 
@@ -45,11 +38,22 @@ const LoginScreen = () => {
   return (
     <Container maxWidth='sm'>
       <Paper className='space-y-6 p-6 md:p-10'>
-        <Typography variant='h3' color='primary' className='-mb-6 text-center'>
-          Sign In
-        </Typography>
+        <div className='space-y-3'>
+          <div className='mb-6 flex items-center justify-center gap-3'>
+            <img src={require('assets/icons/Muragi.svg').default} />
+            <Typography variant='h4' color='primary'>
+              MuiTube
+            </Typography>
+          </div>
+          <Typography variant='h4' className='text-center'>
+            Hi, Welcome Back
+          </Typography>
+          <Typography color='textSecondary' className='text-center'>
+            Enter your credentials to continue
+          </Typography>
+        </div>
 
-        <Grid container spacing={5}>
+        <Grid container spacing={3}>
           <Grid item xs={12}>
             <Controller
               name='username'
@@ -61,7 +65,7 @@ const LoginScreen = () => {
               render={({ field, fieldState: { error } }) => (
                 <TextField {...field} fullWidth label='Username' error={!!error} helperText={error?.message} />
               )}
-            />{' '}
+            />
           </Grid>
           <Grid item xs={12}>
             <Controller
@@ -86,8 +90,9 @@ const LoginScreen = () => {
         </Grid>
 
         <LoadingButton fullWidth size='large' variant='contained' loading={isLoading} onClick={handleClickSubmit}>
-          Login
+          Sign In
         </LoadingButton>
+        <Divider />
 
         <div className='flex justify-center gap-2'>
           Don't have an account?

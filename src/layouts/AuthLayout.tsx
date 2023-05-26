@@ -15,7 +15,7 @@ const AuthLayout = () => {
   }, [isLoggedIn, navigator]);
 
   return (
-    <main className='flex items-center justify-center'>
+    <main className='flex items-center justify-center bg-[#eef2f6]'>
       <Routes>
         {Object.values(authRoute).map(({ path, component: Element }) => (
           <Route key={path} path={path} element={<Element />} />
