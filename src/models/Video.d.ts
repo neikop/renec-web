@@ -7,7 +7,8 @@ type Video = {
   thumbnailHeight: number;
   thumbnailWidth: number;
   thumbnailUrl: string;
-  html: string;
+  createdAt: string;
+  createdBy: string;
 };
 
 type CreateVideoBody = {
@@ -18,7 +19,6 @@ type CreateVideoBody = {
   thumbnailHeight?: number;
   thumbnailWidth?: number;
   thumbnailUrl?: string;
-  html?: string;
 };
 
 type GetVideoInfoParams = {

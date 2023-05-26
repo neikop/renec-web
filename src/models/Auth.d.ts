@@ -1,6 +1,7 @@
 type ProfileType = {
   isLoggedIn?: boolean;
   accessToken?: string;
+  id?: string;
   username?: string;
 };
 
@@ -10,6 +11,7 @@ type LoginBody = {
 };
 
 type LoginResponse = {
+  id: string;
   username: string;
   accessToken: string;
 };
