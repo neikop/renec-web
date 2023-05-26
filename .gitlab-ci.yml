@@ -1,0 +1,104 @@
+variables:
+  GIT_STRATEGY: clone
+  DOCKER_IMAGE_NAME: $DOCKER_URL/$PROJECT_GROUP/$CI_PROJECT_NAME
+  CHART_SERVICE_TAG_PATH: $CHART_YAML_SELECTOR.$CI_PROJECT_NAME.image.tag
+  DOCKER_YQ_IMAGE: mikefarah/yq@sha256:551e82efdb7145eb7eeee70ab73ea8b2f4d171d89913dd97a26c4d22d46df6f4
+workflow:
+  rules:
+    - if: $CI_COMMIT_BRANCH == "develop"
+      variables:
+        CHART_GIT_URL: $CHART_DEV_URL
+        CHART_VALUES_FILE: "values-dev.yaml"
+        DOCKER_IMAGE_TAG: "dev-$CI_COMMIT_SHORT_SHA"
+        ENV_FILE: ".env"
+    - if: $CI_COMMIT_BRANCH == "staging"
+      variables:
+        CHART_GIT_URL: $CHART_STAGING_URL
+        CHART_VALUES_FILE: "values-staging.yaml"
+        DOCKER_IMAGE_TAG: "staging-$CI_COMMIT_SHORT_SHA"
+        ENV_FILE: ".env.staging"
+    - if: $CI_COMMIT_TAG
+      variables:
+        CHART_GIT_URL: $CHART_PROD_URL
+        CHART_VALUES_FILE: "values-prod.yaml"
+        DOCKER_IMAGE_TAG: "$CI_COMMIT_TAG"
+        ENV_FILE: ".env.production"
+
+stages:
+  - build
+  - deploy
+  - deploy2
+
+build:
+  stage: build
+  before_script:
+    - docker login $DOCKER_URL -u $DOCKER_USERNAME -p $DOCKER_PASSWD
+  script:
+    - cp $ENV_FILE .env.local
+    - docker build -t $DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG .
+    - docker push $DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_COMMIT_BRANCH == "develop"
+    - if: $CI_COMMIT_BRANCH == "staging"
+    - if: $CI_COMMIT_TAG
+  tags:
+    - local-runner #need change to local runner
+
+deploy:
+  stage: deploy
+  variables:
+    GIT_STRATEGY: none
+  before_script:
+    - rm -rf chart
+  script:
+    - git clone https://$RUNNER_GITLAB_USER:$RUNNER_GITLAB_TOKEN@$CHART_GIT_URL chart && cd chart
+    - >
+      docker run --rm
+      --user="root"
+      -v "${PWD}":/workspace
+      -w /workspace
+      $DOCKER_YQ_IMAGE
+      eval ''$CHART_SERVICE_TAG_PATH' = "'$DOCKER_IMAGE_TAG'"' -i $CHART_VALUES_FILE
+    - git config --global user.email "AirData-Ops@gmail.com"
+    - git config --global user.name "DevOps Team"
+    - git add .
+    - git commit -m "[BOT] Update $CI_PROJECT_NAME image tag to $DOCKER_IMAGE_TAG"
+    - git push
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_COMMIT_BRANCH == "staging"
+    - if: $CI_COMMIT_TAG
+      when: manual
+  tags:
+    - harbor-v1
+
+deploy2:
+  stage: deploy2
+  variables:
+    GIT_STRATEGY: none
+    DOCKER_IMAGE_TAG: "dev-$CI_COMMIT_SHORT_SHA"
+    CHART_GIT_URL2: gitlab.com/airdata-secret/development-cluster-workloads.git
+    ENV: "dev"
+    NAMESPACE: 'sfo-core'
+    CHART_VALUES_FILE: $ENV/applications/$NAMESPACE/values.yaml
+  before_script:
+    - rm -rf chart
+  script:
+    - git clone https://$RUNNER_GITLAB_USER:$RUNNER_GITLAB_TOKEN@$CHART_GIT_URL2  chart && cd chart
+    - >
+      docker run --rm
+      --user="root"
+      -v "${PWD}":/workspace
+      -w /workspace
+      $DOCKER_YQ_IMAGE
+      eval ''$CHART_SERVICE_TAG_PATH' = "'$DOCKER_IMAGE_TAG'"' -i $CHART_VALUES_FILE
+    - git config --global user.email "AirData-Ops@gmail.com"
+    - git config --global user.name "DevOps Team"
+    - git add .
+    - git commit -m "[BOT] Update $CI_PROJECT_NAME image tag to $DOCKER_IMAGE_TAG"
+    - git push
+  rules:
+    - if: $CI_COMMIT_BRANCH == "develop"
+  tags:
+    - harbor-v1

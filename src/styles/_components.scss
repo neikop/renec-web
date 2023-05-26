@@ -1,0 +1,74 @@
+.MuiButton-containedPrimary {
+  background-color: var(--color-primary-main);
+}
+
+.MuiButton-containedSecondary {
+  background-color: var(--color-secondary-main);
+}
+
+.MuiButton-root {
+  &.MuiButton-containedPrimary {
+    &.Mui-disabled,
+    &.MuiLoadingButton-loading {
+      background-color: var(--color-primary-light);
+    }
+    &.Mui-disabled,
+    &.MuiLoadingButton-loading,
+    .MuiLoadingButton-loadingIndicator {
+      color: rgba(255, 255, 255, 0.8);
+    }
+  }
+
+  &.MuiButton-containedSecondary {
+    &.Mui-disabled,
+    &.MuiLoadingButton-loading {
+      background-color: var(--color-secondary-light);
+    }
+    &.Mui-disabled,
+    &.MuiLoadingButton-loading,
+    .MuiLoadingButton-loadingIndicator {
+      color: rgba(255, 255, 255, 0.8);
+    }
+  }
+
+  &.MuiButton-containedInherit {
+    &.Mui-disabled,
+    &.MuiLoadingButton-loading,
+    .MuiLoadingButton-loadingIndicator {
+      color: rgba(0, 0, 0, 0.4);
+    }
+  }
+}
+
+.MuiButton-root {
+  &.MuiButton-outlinedPrimary,
+  &.MuiButton-textPrimary {
+    color: var(--color-primary-main);
+    &.Mui-disabled,
+    &.MuiLoadingButton-loading,
+    .MuiLoadingButton-loadingIndicator {
+      color: var(--color-primary-light);
+    }
+  }
+
+  &.MuiButton-outlinedSecondary,
+  &.MuiButton-textSecondary {
+    color: var(--color-secondary-main);
+    &.Mui-disabled,
+    &.MuiLoadingButton-loading,
+    .MuiLoadingButton-loadingIndicator {
+      color: var(--color-secondary-light);
+    }
+  }
+
+  &.MuiButton-outlinedInherit,
+  &.MuiButton-textInherit {
+    color: rgba(0, 0, 0, 0.8);
+    border-color: rgba(0, 0, 0, 0.2);
+    &.Mui-disabled,
+    &.MuiLoadingButton-loading,
+    .MuiLoadingButton-loadingIndicator {
+      color: rgba(0, 0, 0, 0.4);
+    }
+  }
+}
