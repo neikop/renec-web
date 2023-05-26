@@ -44,13 +44,13 @@ const LoginScreen = () => {
 
   return (
     <Container maxWidth='sm'>
-      <Paper className='space-y-6 p-10'>
-        <Typography variant='h3' color='primary' className='text-center'>
+      <Paper className='space-y-6 p-6 md:p-10'>
+        <Typography variant='h3' color='primary' className='-mb-6 text-center'>
           Sign In
         </Typography>
 
         <Grid container spacing={5}>
-          <Grid item md={12}>
+          <Grid item xs={12}>
             <Controller
               name='username'
               defaultValue=''
@@ -63,7 +63,7 @@ const LoginScreen = () => {
               )}
             />{' '}
           </Grid>
-          <Grid item md={12}>
+          <Grid item xs={12}>
             <Controller
               name='password'
               defaultValue=''

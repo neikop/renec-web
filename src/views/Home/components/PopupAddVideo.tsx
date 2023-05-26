@@ -43,10 +43,10 @@ const PopupAddVideo = ({ onClose }: PopupController) => {
 
       <DialogContent>
         <Grid container spacing={3}>
-          <Grid item sm={12}>
+          <Grid item xs={12}>
             <CardVideo video={videoInfo} />
           </Grid>
-          <Grid item sm={12}>
+          <Grid item xs={12}>
             <Controller
               name='url'
               defaultValue=''
