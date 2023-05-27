@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1.4
 
 # 1. For build React app
-FROM node:16.20.0 AS development
+FROM node:16.20-alpine AS development
 
 # Set working directory
 WORKDIR /app
@@ -17,6 +17,7 @@ COPY . /app
 
 ENV CI=true
 ENV PORT=3000
+ENV REACT_APP_API_URL=http://103.57.220.141:8080
 
 CMD [ "npm", "start" ]
 
@@ -24,21 +25,6 @@ FROM development AS build
 
 RUN npm run build
 
-
-FROM development as dev-envs
-RUN <<EOF
-apt-get update
-apt-get install -y --no-install-recommends git
-EOF
-
-RUN <<EOF
-useradd -s /bin/bash -m vscode
-groupadd docker
-usermod -aG docker vscode
-EOF
-# install Docker tools (cli, buildx, compose)
-COPY --from=gloursdocker/docker / /
-CMD [ "npm", "start" ]
 
 # 2. For Nginx setup
 FROM nginx:alpine
