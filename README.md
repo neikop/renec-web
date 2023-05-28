@@ -10,6 +10,8 @@
 
 _You should register a new account first before can login and go through app._
 
+**API repository**: https://github.com/neikop/renec-api
+
 ## Dependencies
 
 | Operation/ Build Environment | Version |
@@ -27,22 +29,28 @@ You can see more detaily in `package.json`
 
 ### Install Dependencies
 
-```
-npm install
+```bash
+$ npm install
 ```
 
 ### Run
 
-```
-npm start
+```bash
+$ npm start
 ```
 
 ### Environment
 Please check `.env`
 
-If you run the API on your local environment too, just keep `REACT_APP_API_URL=http://localhost:8080`
+If you run the API on your local environment too, just keep:
+```
+REACT_APP_API_URL=http://localhost:8080
+```
 
-Otherwise, if you prefer point to deployed API please change to `REACT_APP_API_URL=http://103.57.220.141`
+Otherwise, if you prefer point to deployed API please change to:
+```
+REACT_APP_API_URL=http://103.57.220.141
+```
 
 ---
 ### Material UI - CRA example with Tailwind CSS in TypeScript
