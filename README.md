@@ -1,43 +1,55 @@
-# Material UI - CRA example with Tailwind CSS in TypeScript
+# MuiTube - Demo application for interview
 
-## How to use
+### Features
+- User registration and login.
+- Sharing YouTube videos.
+- Viewing a list of shared videos.
+- Real-time notifications for new videos shared.
 
-Download the example [or clone the repo](https://github.com/mui/material-ui):
+**Link Demo**: http://103.57.220.141/auth/login
 
-<!-- #default-branch-switch -->
+_You should register a new account first before can login and go through app._
 
-```sh
-curl https://codeload.github.com/mui/material-ui/tar.gz/master | tar -xz --strip=2 material-ui-master/examples/material-cra-tailwind-ts
-cd material-cra-tailwind-ts
+## Dependencies
+
+| Operation/ Build Environment | Version |
+| ---------------------------- | ------- |
+| Node.js                      | 16.20.0 |
+| react                        | ^18.2.0 |
+| typescript                   | ^4.8.3  |
+| tailwindcss                  | ^3.3.1  |
+| @mui/material                | ^5.12.0 |
+| ...                          |         |
+
+You can see more detaily in `package.json`
+
+## Development
+
+### Install Dependencies
+
+```
+npm install
 ```
 
-Install it and run:
+### Run
 
-```sh
-npm install
+```
 npm start
 ```
 
-or:
+### Environment
+Please check `.env`
 
-<!-- #default-branch-switch -->
+If you run the API on your local environment too, just keep `REACT_APP_API_URL=http://localhost:8080`
 
-[![Edit on CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/mui/material-ui/tree/master/examples/material-cra-tailwind-ts)
+Otherwise, if you prefer point to deployed API please change to `REACT_APP_API_URL=http://103.57.220.141`
 
-<!-- #default-branch-switch -->
+---
+### Material UI - CRA example with Tailwind CSS in TypeScript
 
-[![Edit on StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/mui/material-ui/tree/master/examples/material-cra-tailwind-ts)
+The project is based on Material UI template.
 
-## The idea behind the example
+#### The idea behind the example
 
-<!-- #default-branch-switch -->
-
-This example demonstrates how you can use [Tailwind CSS](https://tailwindcss.com/) and [Create React App](https://github.com/facebookincubator/create-react-app) together with Material UI.
+This example demonstrates how you can use [Tailwind CSS](https://tailwindcss.com/) and [Create React App](https://github.com/facebookincubator/create-react-app) together with [Material UI](https://mui.com/material-ui/getting-started/overview).
 It includes `@mui/material` and its peer dependencies, including [Emotion](https://emotion.sh/docs/introduction), the default style engine in Material UI v5.
-
-## What's next?
-
-<!-- #default-branch-switch -->
-
-You now have a working example project.
-You can head back to the documentation, continuing browsing it from the [templates](https://mui.com/material-ui/getting-started/templates/) section.
