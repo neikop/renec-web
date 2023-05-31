@@ -1,10 +1,18 @@
 import { Avatar, Box, Card, CardMedia, Typography } from '@mui/material';
+import { DateTime } from 'luxon';
+import { useMemo } from 'react';
+import { timeAgo } from 'utils/common';
 
 type Props = {
   video?: Video;
+  detail?: boolean;
 };
 
-const CardVideo = ({ video }: Props) => {
+const CardVideo = ({ video, detail }: Props) => {
+  const view = useMemo(() => {
+    return Math.floor(Math.random() * 200) + 10;
+  }, []);
+
   return (
     <Card elevation={0}>
       <Box
@@ -41,6 +49,13 @@ const CardVideo = ({ video }: Props) => {
           <Typography component='a' href={video?.authorUrl} className='text-sm font-bold' color='textSecondary'>
             {video?.authorName}
           </Typography>
+          {detail && (
+            <Typography className='flex gap-2 text-sm font-bold' color='textSecondary'>
+              <span>{view}K views</span>
+              <span>•</span>
+              <span>{timeAgo(DateTime.fromISO(video?.createdAt!))}</span>
+            </Typography>
+          )}
         </div>
       </div>
     </Card>
