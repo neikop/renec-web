@@ -8,8 +8,6 @@
 
 **Link Demo**: http://103.57.220.141/auth/login
 
-_You should register a new account first before can login and go through app._
-
 **API repository**: https://github.com/neikop/renec-api
 
 ## Dependencies
@@ -49,7 +47,7 @@ REACT_APP_API_URL=http://localhost:8080
 
 Otherwise, if you prefer point to deployed API please change to:
 ```
-REACT_APP_API_URL=http://103.57.220.141
+REACT_APP_API_URL=http://103.57.220.141:8080
 ```
 
 ---
