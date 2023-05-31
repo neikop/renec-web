@@ -1,0 +1,1 @@
+type AlignMode = 'card' | 'stream';

@@ -3,15 +3,18 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RootState } from './store';
 
 type SwitchThemePayload = {
-  mode: PaletteMode;
+  mode?: PaletteMode;
+  align?: AlignMode;
 };
 
 type ThemeState = {
   mode: PaletteMode;
+  align: AlignMode;
 };
 
 const initialState: ThemeState = {
   mode: 'light',
+  align: 'stream',
 };
 
 export const themeSlice = createSlice({
@@ -25,4 +28,8 @@ export const themeSlice = createSlice({
 });
 
 export const { switchTheme } = themeSlice.actions;
-export const themeSelector = ({ theme }: RootState) => ({ ...theme, isDark: theme.mode === 'dark' });
+export const themeSelector = ({ theme }: RootState) => ({
+  ...theme,
+  isDark: theme.mode === 'dark',
+  isCard: theme.align === 'card',
+});

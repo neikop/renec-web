@@ -7,6 +7,7 @@ type Video = {
   thumbnailHeight: number;
   thumbnailWidth: number;
   thumbnailUrl: string;
+  html?: string;
   createdAt: string;
   createdBy: string;
 };

@@ -1,13 +1,26 @@
-import { Logout } from '@mui/icons-material';
-import { AppBar, Avatar, Button, Chip, IconButton, Toolbar, Tooltip, Typography } from '@mui/material';
+import { Logout, ViewModule, ViewStream } from '@mui/icons-material';
+import {
+  AppBar,
+  Avatar,
+  Button,
+  Chip,
+  IconButton,
+  ToggleButton,
+  ToggleButtonGroup,
+  Toolbar,
+  Tooltip,
+  Typography,
+} from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { profileSelector, signOut } from 'reducers/profileSlice';
+import { switchTheme, themeSelector } from 'reducers/themeSlice';
 import { authRoute, privateRoute } from 'routes';
 
 const AppHeader = () => {
   const dispatch = useDispatch();
   const { isLoggedIn, username } = useSelector(profileSelector);
+  const { align } = useSelector(themeSelector);
 
   const handleClickLogout = () => {
     dispatch(signOut());
@@ -25,6 +38,21 @@ const AppHeader = () => {
           </div>
         </Link>
         <div className='flex flex-1 items-center justify-end gap-3'>
+          <ToggleButtonGroup
+            exclusive
+            color='primary'
+            value={align}
+            onChange={(event, value: AlignMode) => dispatch(switchTheme({ align: value }))}
+            className='mobile:hidden'
+          >
+            <ToggleButton value='stream'>
+              <ViewStream />
+            </ToggleButton>
+            <ToggleButton value='card'>
+              <ViewModule />
+            </ToggleButton>
+          </ToggleButtonGroup>
+
           {isLoggedIn ? (
             <>
               <Chip
