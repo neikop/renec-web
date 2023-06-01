@@ -1,10 +1,5 @@
-import { ArrowDropDown, ArrowDropUp } from '@mui/icons-material';
-import { CssBaseline, LinearProgress, PaletteMode, ThemeProvider } from '@mui/material';
+import { CssBaseline, PaletteMode, ThemeProvider } from '@mui/material';
 import { createTheme, responsiveFontSizes } from '@mui/material/styles';
-import type {} from '@mui/x-data-grid/themeAugmentation';
-import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterLuxon } from '@mui/x-date-pickers/AdapterLuxon';
-import { GridEmpty, GridFooter } from 'components/common';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { themeSelector } from 'reducers/themeSlice';
@@ -46,35 +41,6 @@ const createAppTheme = (mode?: PaletteMode) =>
         defaultProps: {
           maxWidth: 'sm',
           fullWidth: true,
-        },
-      },
-      MuiDataGrid: {
-        defaultProps: {
-          rowSelection: false,
-          disableColumnMenu: true,
-          autoHeight: true,
-          getRowHeight: () => 'auto',
-          sortingMode: 'server',
-          paginationMode: 'server',
-          sortingOrder: ['desc', 'asc', null],
-          pageSizeOptions: [10, 20, 50, 100],
-          initialState: {
-            sorting: {
-              sortModel: [{ field: 'createdAt', sort: 'desc' }],
-            },
-            pagination: {
-              paginationModel: { page: 0, pageSize: 10 },
-            },
-          },
-          slots: {
-            loadingOverlay: LinearProgress,
-            noRowsOverlay: GridEmpty,
-            footer: GridFooter,
-            columnSortedAscendingIcon: ArrowDropUp,
-            columnSortedDescendingIcon: ArrowDropDown,
-          },
-          showCellVerticalBorder: true,
-          showColumnVerticalBorder: true,
         },
       },
     },
@@ -125,10 +91,8 @@ const AppTheme = ({ children }: Props) => {
 
   return (
     <ThemeProvider theme={responsiveFontSizes(createAppTheme(mode))}>
-      <LocalizationProvider dateAdapter={AdapterLuxon}>
-        <CssBaseline />
-        {children}
-      </LocalizationProvider>
+      <CssBaseline />
+      {children}
     </ThemeProvider>
   );
 };

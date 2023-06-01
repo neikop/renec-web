@@ -1,4 +1,3 @@
-import { GridPaginationModel } from '@mui/x-data-grid';
 import { useCallback, useState } from 'react';
 
 type CommonSearch = {
@@ -22,15 +21,7 @@ const useSearch = (search?: CommonSearch) => {
     }));
   }, []);
 
-  const onPaginationChange = useCallback((models: GridPaginationModel) => {
-    setDataSearch((current) => ({
-      ...current,
-      page: models.page + 1,
-      size: models.pageSize,
-    }));
-  }, []);
-
-  return { dataSearch, onSearchChange, onPaginationChange };
+  return { dataSearch, onSearchChange };
 };
 
 export default useSearch;
