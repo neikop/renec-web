@@ -6,7 +6,6 @@ let instance = io({ autoConnect: false });
 
 export const socket = {
   connect: () => {
-    console.log('1. SOCKET CONNECT');
     const { isLoggedIn, accessToken }: ProfileType = store.getState().profile;
     if (isLoggedIn && !instance.connected) {
       instance = io(API_URL!, {
@@ -18,7 +17,6 @@ export const socket = {
   disconnect: () => {
     try {
       instance.disconnect();
-      console.log('2. SOCKET DISCONNECT');
     } catch {}
   },
   instance: () => instance,

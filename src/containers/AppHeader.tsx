@@ -45,10 +45,10 @@ const AppHeader = () => {
             onChange={(event, value: AlignMode) => dispatch(switchTheme({ align: value }))}
             className='mobile:hidden'
           >
-            <ToggleButton value='stream'>
+            <ToggleButton value='stream' aria-label='stream'>
               <ViewStream />
             </ToggleButton>
-            <ToggleButton value='card'>
+            <ToggleButton value='card' aria-label='card'>
               <ViewModule />
             </ToggleButton>
           </ToggleButtonGroup>

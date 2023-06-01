@@ -25,6 +25,7 @@ const RegisterScreen = () => {
       register({
         ...values,
         password: md5(values.password),
+        confirmPassword: '',
       });
     })();
   };

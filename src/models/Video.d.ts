@@ -4,8 +4,8 @@ type Video = {
   title: string;
   authorName: string;
   authorUrl: string;
-  thumbnailHeight: number;
-  thumbnailWidth: number;
+  thumbnailHeight?: number;
+  thumbnailWidth?: number;
   thumbnailUrl: string;
   html?: string;
   createdAt: string;
